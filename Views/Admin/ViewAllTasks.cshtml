@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TaskView>
+
+@{
+    ViewBag.Title = "View All Tasks";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">View All Tasks</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Task ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Assigned To</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var task in Model)
+                {
+                    <tr>
+                        <td>@task.TaskID</td>
+                        <td>@task.Title</td>
+                        <td>@task.Description</td>
+                        <td>@task.Status</td>
+                        <td>@task.AssignedTo</td>
+                        <td>@task.DueDate.ToString("d")</td> <!-- Adjust date format as needed -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿@model TaskView
+
+@{
+    ViewBag.Title = "Create Task";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Create New Task</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Title, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control form-control-lg", placeholder = "Enter task title" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, new { @class = "form-label" })
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control form-control-lg", placeholder = "Enter task description", rows = 4 })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DueDate, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.DueDate, "{0:yyyy-MM-dd}", new { @class = "form-control form-control-lg", type = "date" })
+                            @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("AssignedTo", new { @class = "form-label" })
+                            @Html.DropDownList("AssignedTo", (SelectList)ViewBag.Users, "Select User", new { @class = "form-control form-control-lg" })
+                            @Html.ValidationMessage("AssignedTo", "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group text-center">
+                            <input type="submit" value="Create Task" class="btn btn-primary btn-lg btn-block" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    .form-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-bottom: 2px solid #007bff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+</style>
